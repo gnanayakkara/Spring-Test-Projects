@@ -11,6 +11,7 @@
 	<groupId>com.gnanayakkara</groupId>
 	<artifactId>SpringTest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>SpringTest</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -73,13 +74,15 @@
 			</plugin>
 			<plugin>
 			    <artifactId>maven-war-plugin</artifactId>
-			    <version>3.3.1</version>
 			    <configuration>
-			        <archive>
-			            <manifest>
-			                <addClasspath>true</addClasspath>
-			            </manifest>
-			        </archive>
+			        <attachClasses>true</attachClasses>
+			        <!-- <webXml>target/web.xml</webXml> -->
+			        <!-- <webResources>
+			            <resource>
+			                <directory>src/main/webapp</directory>
+			                <filtering>true</filtering>
+			            </resource>
+			        </webResources> -->
 			    </configuration>
 			</plugin>
 		</plugins>
