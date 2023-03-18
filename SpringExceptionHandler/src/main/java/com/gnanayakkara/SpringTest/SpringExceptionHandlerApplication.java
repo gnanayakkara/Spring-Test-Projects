@@ -1,9 +1,9 @@
 package com.gnanayakkara.SpringTest;
 
-import java.util.Collections;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 
 import springfox.documentation.builders.PathSelectors;
@@ -16,7 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-public class SpringExceptionHandlerApplication {
+public class SpringExceptionHandlerApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringExceptionHandlerApplication.class, args);
@@ -42,6 +42,15 @@ public class SpringExceptionHandlerApplication {
 				"com.gnanayakkara.com",
 				"Free licence",
 				"http://gnanayakkara.io");
+	}
+	
+	/*
+	 * Added to deploy in tomcat file
+	 */
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		// TODO Auto-generated method stub
+		return builder.sources(SpringExceptionHandlerApplication.class);
 	}
 
 }
