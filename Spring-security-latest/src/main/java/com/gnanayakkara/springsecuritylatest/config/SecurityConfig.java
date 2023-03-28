@@ -24,7 +24,7 @@ public class SecurityConfig {
 	@Bean
 	public UserDetailsService userDetailsService(PasswordEncoder encoder) {
 		
-		UserDetails admin = User.withUsername("admin") 
+		/*UserDetails admin = User.withUsername("admin") 
 				.password(encoder.encode("123"))
 				.roles("ADMIN")
 				.build();
@@ -34,7 +34,9 @@ public class SecurityConfig {
 				.roles("USER")
 				.build();
 		
-		return new InMemoryUserDetailsManager(admin,user);
+		return new InMemoryUserDetailsManager(admin,user);*/
+		
+		return new UserInfoUserDetailsService();
 	}
 	
 	@Bean
@@ -42,12 +44,10 @@ public class SecurityConfig {
 		
 		return httpSecurity.csrf().disable()
 				.authorizeHttpRequests()
-				.requestMatchers("/products/welcome")
-				.permitAll()
+				.requestMatchers("/products/welcome","/products/new").permitAll()
 				.and()
 				.authorizeHttpRequests()
-				.requestMatchers("/products/**")
-				.authenticated()
+				.requestMatchers("/products/**").authenticated()
 				.and()
 				.formLogin()
 				.and()

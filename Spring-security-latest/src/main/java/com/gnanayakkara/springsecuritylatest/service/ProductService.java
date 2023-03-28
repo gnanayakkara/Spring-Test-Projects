@@ -5,9 +5,13 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.gnanayakkara.springsecuritylatest.dto.Product;
+import com.gnanayakkara.springsecuritylatest.entity.UserInfo;
+import com.gnanayakkara.springsecuritylatest.reposotory.UserInfoRepository;
 
 import jakarta.annotation.PostConstruct;
 
@@ -19,7 +23,13 @@ import jakarta.annotation.PostConstruct;
 public class ProductService {
 
 	List<Product> productList;
+	
+	@Autowired
+	private UserInfoRepository userInfoRepository;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@PostConstruct
 	public void loadProductsFromDB() {
 
@@ -42,5 +52,13 @@ public class ProductService {
 				.filter(p -> p.getProductId() == id)
 				.findAny()
 				.orElseThrow(() -> new RuntimeException("Product " + id + " not found"));
+	}
+	
+	public String addUser(UserInfo userInfo) {
+		
+		userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
+		userInfoRepository.save(userInfo);
+		
+		return "User added to system";
 	}
 }

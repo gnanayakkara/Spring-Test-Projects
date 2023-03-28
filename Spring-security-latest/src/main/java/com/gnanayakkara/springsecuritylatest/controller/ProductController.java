@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gnanayakkara.springsecuritylatest.dto.Product;
+import com.gnanayakkara.springsecuritylatest.entity.UserInfo;
 import com.gnanayakkara.springsecuritylatest.service.ProductService;
 
 /*
@@ -25,6 +27,11 @@ public class ProductController {
 	@GetMapping("/welcome")
 	public String welcome() {
 		return "Welcome this endpoint is not secure";
+	}
+	
+	@PostMapping("/new")
+	public String addNewUser(UserInfo userInfo) {
+		return productService.addUser(userInfo);
 	}
 	
 	@GetMapping("/all")
