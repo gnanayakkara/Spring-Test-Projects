@@ -56,6 +56,7 @@ public class ProductService {
 	
 	public String addUser(UserInfo userInfo) {
 		
+		System.out.println("Info : " + userInfo);
 		userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
 		userInfoRepository.save(userInfo);
 		
